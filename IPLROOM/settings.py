@@ -28,14 +28,15 @@ X_FRAME_OPTIONS = 'ALLOWALL'
 SECRET_KEY = "django-insecure-63m7*vscwrt7*gcs2pibxct36u-i8dm%5p6#hjmcujt+t+p28#"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["Krishna5488.pythonanywhere.com"]
+ALLOWED_HOSTS = ["localhost", "krishna5488.pythonanywhere.com"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -94,8 +95,14 @@ TEMPLATES = [
         },
     },
 ]
-
+ASGI_APPLICATION = "IPLROOM.asgi.application"
 WSGI_APPLICATION = "IPLROOM.wsgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 
 # Database
@@ -144,13 +151,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 import os
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,'assets')
 STATICSTORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
